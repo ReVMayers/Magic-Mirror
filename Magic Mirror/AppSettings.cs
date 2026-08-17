@@ -6,9 +6,19 @@ namespace Magic_Mirror
 {
     public class AppSettings
     {
-        public bool UseMirrorVoice { get; set; } = true;
+        public bool UseMirrorVoice { get; set; } = false;
 
         public bool MinimizeToTrayOnClose { get; set; } = false;
+
+        public int? WindowX { get; set; }
+
+        public int? WindowY { get; set; }
+
+        public int? WindowWidth { get; set; }
+
+        public int? WindowHeight { get; set; }
+
+        public bool WindowMaximized { get; set; } = false;
     }
 
     public static class SettingsManager

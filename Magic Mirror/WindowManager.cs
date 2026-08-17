@@ -43,6 +43,39 @@ namespace Magic_Mirror
             out RECT lpRect
         );
 
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool SetForegroundWindow(
+            IntPtr hWnd
+        );
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool BringWindowToTop(
+            IntPtr hWnd
+        );
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool ShowWindow(
+            IntPtr hWnd,
+            int nCmdShow
+        );
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("kernel32.dll")]
+        private static extern uint GetCurrentThreadId();
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool AttachThreadInput(
+            uint idAttach,
+            uint idAttachTo,
+            bool fAttach
+        );
+
         [StructLayout(LayoutKind.Sequential)]
         private struct RECT
         {
@@ -139,6 +172,73 @@ namespace Magic_Mirror
         {
             return FindUsableWindow(processIds)
                 != IntPtr.Zero;
+        }
+
+        public static void BringWindowToForeground(
+            IntPtr hWnd)
+        {
+            if (hWnd == IntPtr.Zero)
+            {
+                return;
+            }
+
+            const int SwRestore = 9;
+
+            if (IsIconic(hWnd))
+            {
+                ShowWindow(
+                    hWnd,
+                    SwRestore
+                );
+            }
+
+            IntPtr foregroundWindow =
+                GetForegroundWindow();
+
+            uint currentThreadId =
+                GetCurrentThreadId();
+
+            uint foregroundThreadId = 0;
+
+            if (foregroundWindow != IntPtr.Zero)
+            {
+                foregroundThreadId =
+                    GetWindowThreadProcessId(
+                        foregroundWindow,
+                        out _
+                    );
+            }
+
+            bool attached = false;
+
+            try
+            {
+                if (foregroundThreadId != 0 &&
+                    foregroundThreadId !=
+                        currentThreadId)
+                {
+                    attached =
+                        AttachThreadInput(
+                            currentThreadId,
+                            foregroundThreadId,
+                            true
+                        );
+                }
+
+                BringWindowToTop(hWnd);
+                SetForegroundWindow(hWnd);
+            }
+            finally
+            {
+                if (attached)
+                {
+                    AttachThreadInput(
+                        currentThreadId,
+                        foregroundThreadId,
+                        false
+                    );
+                }
+            }
         }
     }
 }

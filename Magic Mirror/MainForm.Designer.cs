@@ -39,6 +39,8 @@
             lvProfiles = new ListView();
             colProfile = new ColumnHeader();
             colStatus = new ColumnHeader();
+            btnBackupProfiles = new Button();
+            lblVersion = new Label();
             SuspendLayout();
             // 
             // lblProfiles
@@ -53,7 +55,7 @@
             // btnCreateProfile
             // 
             btnCreateProfile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCreateProfile.Location = new Point(564, 70);
+            btnCreateProfile.Location = new Point(583, 70);
             btnCreateProfile.Name = "btnCreateProfile";
             btnCreateProfile.Size = new Size(149, 23);
             btnCreateProfile.TabIndex = 2;
@@ -64,7 +66,7 @@
             // btnOpenProfile
             // 
             btnOpenProfile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnOpenProfile.Location = new Point(564, 99);
+            btnOpenProfile.Location = new Point(583, 99);
             btnOpenProfile.Name = "btnOpenProfile";
             btnOpenProfile.Size = new Size(149, 23);
             btnOpenProfile.TabIndex = 3;
@@ -75,7 +77,7 @@
             // btnStopProfile
             // 
             btnStopProfile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnStopProfile.Location = new Point(564, 128);
+            btnStopProfile.Location = new Point(583, 128);
             btnStopProfile.Name = "btnStopProfile";
             btnStopProfile.Size = new Size(149, 23);
             btnStopProfile.TabIndex = 4;
@@ -86,7 +88,7 @@
             // btnRefresh
             // 
             btnRefresh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnRefresh.Location = new Point(564, 157);
+            btnRefresh.Location = new Point(583, 157);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(149, 23);
             btnRefresh.TabIndex = 5;
@@ -97,7 +99,7 @@
             // btnSettings
             // 
             btnSettings.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSettings.Location = new Point(564, 351);
+            btnSettings.Location = new Point(583, 351);
             btnSettings.Name = "btnSettings";
             btnSettings.Size = new Size(149, 23);
             btnSettings.TabIndex = 6;
@@ -108,7 +110,7 @@
             // btnDeleteProfile
             // 
             btnDeleteProfile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnDeleteProfile.Location = new Point(564, 322);
+            btnDeleteProfile.Location = new Point(583, 322);
             btnDeleteProfile.Name = "btnDeleteProfile";
             btnDeleteProfile.Size = new Size(149, 23);
             btnDeleteProfile.TabIndex = 7;
@@ -125,12 +127,13 @@
             lvProfiles.Location = new Point(12, 60);
             lvProfiles.MultiSelect = false;
             lvProfiles.Name = "lvProfiles";
-            lvProfiles.Size = new Size(546, 328);
+            lvProfiles.Size = new Size(556, 328);
             lvProfiles.TabIndex = 8;
             lvProfiles.UseCompatibleStateImageBehavior = false;
             lvProfiles.View = View.Details;
             lvProfiles.ColumnWidthChanging += lvProfiles_ColumnWidthChanging;
             lvProfiles.SelectedIndexChanged += lvProfiles_SelectedIndexChanged;
+            lvProfiles.MouseDoubleClick += lvProfiles_MouseDoubleClick;
             // 
             // colProfile
             // 
@@ -142,11 +145,35 @@
             colStatus.Text = "Status";
             colStatus.Width = 130;
             // 
+            // btnBackupProfiles
+            // 
+            btnBackupProfiles.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnBackupProfiles.Location = new Point(583, 293);
+            btnBackupProfiles.Name = "btnBackupProfiles";
+            btnBackupProfiles.Size = new Size(149, 23);
+            btnBackupProfiles.TabIndex = 9;
+            btnBackupProfiles.Text = "Backup Profiles";
+            btnBackupProfiles.UseVisualStyleBackColor = true;
+            btnBackupProfiles.Click += btnBackupProfiles_Click;
+            // 
+            // lblVersion
+            // 
+            lblVersion.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            lblVersion.AutoSize = true;
+            lblVersion.BackColor = SystemColors.Control;
+            lblVersion.Location = new Point(666, 387);
+            lblVersion.Name = "lblVersion";
+            lblVersion.Size = new Size(76, 15);
+            lblVersion.TabIndex = 10;
+            lblVersion.Text = "vJust.Monika";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(744, 411);
+            ClientSize = new Size(754, 411);
+            Controls.Add(lblVersion);
+            Controls.Add(btnBackupProfiles);
             Controls.Add(lvProfiles);
             Controls.Add(btnDeleteProfile);
             Controls.Add(btnSettings);
@@ -156,7 +183,7 @@
             Controls.Add(btnCreateProfile);
             Controls.Add(lblProfiles);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(650, 400);
+            MinimumSize = new Size(650, 450);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Magic Mirror";
@@ -176,5 +203,7 @@
         private ListView lvProfiles;
         private ColumnHeader colProfile;
         private ColumnHeader colStatus;
+        private Button btnBackupProfiles;
+        private Label lblVersion;
     }
 }
