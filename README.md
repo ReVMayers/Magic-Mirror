@@ -22,7 +22,7 @@ Magic Mirror can:
 
 ---
 
-## A note from the developer
+## A note from the developer (which is not really the developer)
 
 This project was pieced together from beer, tea, sheer stubbornness and just a heavy pinch of 'tism.
 
