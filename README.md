@@ -42,6 +42,8 @@ New Magic Mirror profiles start with a blank Discord data directory.
 
 The first time a profile is launched, Discord will normally require you to log into an account.
 
+During the first time process your default browser will open a discord website. That is normal.
+
 After a successful login, Discord stores its own local session data inside that profile. Future launches of the same Magic Mirror profile will therefore normally reopen the Discord account previously used with it.
 
 For example:
